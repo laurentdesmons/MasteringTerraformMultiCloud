@@ -1,5 +1,5 @@
 #
-# variables
+# Azure variables
 #
 variable "subscription_id" {
   type        = string
@@ -29,11 +29,29 @@ variable "storage_accounts" {
   description = "map of storage accounts to create"
 }
 
-
 variable "containers" {
   type = map(object({
     name                = string
     storage_account_key = string
   }))
   description = "map of containers to create"
+}
+
+variable "virtual_networks" {
+  type = map(object({
+    name               = string
+    resource_group_key = string
+    address_space      = list(string)
+  }))
+  description = "map of virtual networks to create"
+}
+
+variable "subnets" {
+  type = map(object({
+    name                = string
+    resource_group_key  = string
+    virtual_network_key = string
+    address_prefixes    = list(string)
+  }))
+  description = "map of subnets to create"
 }
