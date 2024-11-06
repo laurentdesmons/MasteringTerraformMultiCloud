@@ -82,8 +82,8 @@ module "app_services" {
       resource_group_name  = module.resource_groups.resource_groups[app.resource_group_key].name
       location             = module.resource_groups.resource_groups[app.resource_group_key].location
       app_service_plan_key = app.app_service_plan_key
-      dotnet_version       = app.dotnet_version
       node_version         = app.node_version
+      source_control       = app.source_control
       app_settings         = app.app_settings
       connection_strings   = app.connection_strings
     }

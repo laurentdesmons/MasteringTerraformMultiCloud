@@ -42,11 +42,22 @@ resource "azurerm_linux_web_app" "app_services" {
     }
   }
   site_config {
+    minimum_tls_version = "1.2"
     application_stack {
-      node_version   = each.value.node_version
-      dotnet_version = each.value.dotnet_version
+      node_version = each.value.node_version
     }
   }
   tags = var.tags
+}
+
+#
+# Source Control
+# 
+resource "azurerm_app_service_source_control" "source_controls" {
+  for_each               = var.app_services
+  app_id                 = azurerm_linux_web_app.app_services[each.key].id
+  repo_url               = each.value.source_control.repo_url
+  branch                 = each.value.source_control.branch
+  use_manual_integration = true
 }
 

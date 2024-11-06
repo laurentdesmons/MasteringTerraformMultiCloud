@@ -20,9 +20,12 @@ variable "app_services" {
     resource_group_name  = string
     location             = string
     app_service_plan_key = string
-    dotnet_version       = string
     node_version         = string
-    app_settings         = map(string)
+    source_control = object({
+      repo_url = string
+      branch   = string
+    })
+    app_settings = map(string)
     connection_strings = map(object({
       name  = string
       type  = string
