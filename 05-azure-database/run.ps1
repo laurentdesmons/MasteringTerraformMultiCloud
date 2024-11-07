@@ -30,6 +30,14 @@ Write-Host "========================================"
 Write-Host ""
 
 try {
+
+    if ($env -eq 'dev') {
+        az account set --subscription "bf4b5027-c92e-4ca3-82ce-bee95bb4accd"
+    }
+    else {
+        az account set --subscription "xxxxxxxxx"
+    }
+
     # init
     Write-Host "Executing: Terraform init"
     terraform init --backend-config=$backend_varfile -reconfigure -upgrade
